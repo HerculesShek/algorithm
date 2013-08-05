@@ -25,8 +25,8 @@ public class QuickSort {
 	}
 
 	public static void main(String[] args) {
-		int[] a = new int[] { 32, 25, 34, 95, 34, 173, 23, 12, 33, 142, 53, 32, 34, 34, 123,
-				34, 15, 435, 12, 43, 305, 23, 14, 1243, 123 };
+		int[] a = new int[] { 32, 25, 34, 95, 34, 173, 23, 12, 33, 142, 53, 32,
+				34, 34, 123, 34, 15, 435, 12, 43, 305, 23, 14, 1243, 123 };
 		quick_sort(a, 0, a.length - 1);
 		for (int i = 0; i < a.length; i++) {
 			System.out.println(a[i]);
