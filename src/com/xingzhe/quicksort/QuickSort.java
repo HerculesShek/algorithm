@@ -1,6 +1,6 @@
 package com.xingzhe.quicksort;
 
-import com.xingzhe.too.Tool;
+import com.xingzhe.tool.Tool;
 
 public class QuickSort {
 	public static void quick_sort(int[] a, int p, int r) {

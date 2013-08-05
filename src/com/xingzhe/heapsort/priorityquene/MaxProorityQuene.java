@@ -1,6 +1,6 @@
 package com.xingzhe.heapsort.priorityquene;
 
-import com.xingzhe.too.Tool;
+import com.xingzhe.tool.Tool;
 
 /**
  * DataStructure——最大优先队列

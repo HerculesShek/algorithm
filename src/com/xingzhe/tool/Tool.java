@@ -1,4 +1,4 @@
-package com.xingzhe.too;
+package com.xingzhe.tool;
 
 public class Tool {
 	public static void swap(int[] a, int i, int j) {
