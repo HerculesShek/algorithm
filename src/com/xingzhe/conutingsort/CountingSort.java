@@ -35,5 +35,15 @@ public class CountingSort {
 		}
 		return b;
 	}
+	public static void main(String[] args) {
+		int[] a = new int[100000000];
+		for (int i = 0; i < a.length; i++) {
+			a[i] = (int)(Math.random()*1000000);
+		}
+		long from = System.currentTimeMillis();
+		int[] b = countingSort(a);
+		long to = System.currentTimeMillis();
+		System.out.println((to-from)/1000);
+	}
 
 }
