@@ -36,12 +36,4 @@ public class CountingSort {
 		return b;
 	}
 
-	public static void main(String[] args) {
-		int[] a = new int[] { 2, 8, 4, 12, 6, 5, 33, 14, 86, 98, 25, 4, 7 };
-
-		int[] b = countingSort(a);
-		for (int i = 0; i < b.length; i++) {
-			System.out.println(b[i]);
-		}
-	}
 }
