@@ -3,7 +3,7 @@ package com.xingzhe.heapsort.priorityquene;
 import com.xingzhe.tool.Tool;
 
 /**
- * DataStructure¡ª¡ª×î´óÓÅÏÈ¶ÓÁĞ
+ * DataStructureâ€”â€”æœ€å¤§ä¼˜å…ˆé˜Ÿåˆ—
  * @author Hersules
  * 
  */
@@ -58,7 +58,7 @@ public class MaxProorityQuene {
 		return (int) (Math.floor((index + 1) / 2) - 1);
 	}
 
-	// ½¨Á¢Ò»¸ö×î´ó¶Ñ,²ÉÓÃ×Ôµ×ÏòÉÏµÄ·½Ê½°ÑÊı×éarray×ª»»Îª×î´ó¶Ñ
+	// å»ºç«‹ä¸€ä¸ªæœ€å¤§å †,é‡‡ç”¨è‡ªåº•å‘ä¸Šçš„æ–¹å¼æŠŠæ•°ç»„arrayè½¬æ¢ä¸ºæœ€å¤§å †
 	public void build_max_heap(int[] a) {
 		int from = (int) Math.floor(heap_size / 2);
 		for (int i = from; i >= 1; i--) {
@@ -67,7 +67,7 @@ public class MaxProorityQuene {
 	}
 
 	/*
-	 * ÈÃ¶ÑaÖĞµÄi½áµãÉÏµÄÖµ¡°¶Ñ»¯¡±¡ª¡ª¾ÍÊÇÈÃi½áµãÉÏµÄÖµÊÇÒÔiÎª¸ù½ÚµãµÄ×ÓÊ÷µÄ×î´óÖµ
+	 * è®©å †aä¸­çš„iç»“ç‚¹ä¸Šçš„å€¼â€œå †åŒ–â€â€”â€”å°±æ˜¯è®©iç»“ç‚¹ä¸Šçš„å€¼æ˜¯ä»¥iä¸ºæ ¹èŠ‚ç‚¹çš„å­æ ‘çš„æœ€å¤§å€¼
 	 */
 	public void max_heapify(int[] a, int i) {
 		int l = 2 * (i + 1) - 1;
@@ -119,5 +119,3 @@ class HeapUnderflowException extends Exception {
 		super(cause);
 	}
 }
-
-

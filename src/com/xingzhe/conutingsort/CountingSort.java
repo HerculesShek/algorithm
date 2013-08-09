@@ -1,49 +1,39 @@
 package com.xingzhe.conutingsort;
 
 /**
- * ¼ÆÊıÅÅĞò ÅÅĞòÒªÇó´ıÅÅĞòµÄÊı×éÖĞ´æ´¢µÄ¶¼ÊÇ·Ç¸ºÕûÊı(0µ½k)£¬£¨ÀíÂÛÉÏ¿ÉÒÔÊÇÈÎÒâÊı£¬²»¹ıĞèÒª
- * °Ñ¸ºÊı±ä³ÉÕıÕûÊı£¬°Ñ¸¡µãÊı±ä³ÉÕıÕûÊı£¬ĞèÒªµÄÊ±ºò¿ÉÒÔ×Ô¼ºĞŞ¸Ä£©
+ * è®¡æ•°æ’åº æ’åºè¦æ±‚å¾…æ’åºçš„æ•°ç»„ä¸­å­˜å‚¨çš„éƒ½æ˜¯éè´Ÿæ•´æ•°(0åˆ°k)ï¼Œï¼ˆç†è®ºä¸Šå¯ä»¥æ˜¯ä»»æ„æ•°ï¼Œä¸è¿‡éœ€è¦
+ * æŠŠè´Ÿæ•°å˜æˆæ­£æ•´æ•°ï¼ŒæŠŠæµ®ç‚¹æ•°å˜æˆæ­£æ•´æ•°ï¼Œéœ€è¦çš„æ—¶å€™å¯ä»¥è‡ªå·±ä¿®æ”¹ï¼‰
  * 
  * @author Hersules
  */
 public class CountingSort {
 	public static int[] countingSort(int[] a) {
 		int[] b = new int[a.length];
-		// 1¡¢ÏÈÕÒ³öÊı×éÖĞµÄ×î´óÖµ
+		// 1ã€å…ˆæ‰¾å‡ºæ•°ç»„ä¸­çš„æœ€å¤§å€¼
 		int largest = 0;
 		for (int i = 0; i < a.length; i++) {
 			if (a[i] > largest)
 				largest = a[i];
 		}
-		// 2¡¢³õÊ¼»¯¼ÆÊıµÄÊı×éc
+		// 2ã€åˆå§‹åŒ–è®¡æ•°çš„æ•°ç»„c
 		int[] c = new int[largest + 1];
 		for (int i = 0; i < c.length; i++) {
 			c[i] = 0;
 		}
-		// 3¡¢¼ÆÊı´ıÅÅĞòÊı×éÖĞÃ¿¸öÔªËØµÄ³öÏÖµÄ¸öÊı
+		// 3ã€è®¡æ•°å¾…æ’åºæ•°ç»„ä¸­æ¯ä¸ªå…ƒç´ çš„å‡ºç°çš„ä¸ªæ•°
 		for (int i = 0; i < a.length; i++) {
 			c[a[i]]++;
-		}// ÏÖÔÚc[m]¾Í±íÊ¾Öµm³öÏÖµÄ´ÎÊı
-		// 4¡¢Í³¼Æ
+		}// ç°åœ¨c[m]å°±è¡¨ç¤ºå€¼må‡ºç°çš„æ¬¡æ•°
+		// 4ã€ç»Ÿè®¡
 		for (int i = 1; i < c.length; i++) {
 			c[i] += c[i - 1];
-		}// ÏÖÔÚc[m]¾Í±íÊ¾ Ğ¡ÓÚµÈÓÚmµÄÖµ ³öÏÖµÄ´ÎÊı
-		// 5¡¢ÅÅĞò
+		}// ç°åœ¨c[m]å°±è¡¨ç¤º å°äºç­‰äºmçš„å€¼ å‡ºç°çš„æ¬¡æ•°
+		// 5ã€æ’åº
 		for (int j = a.length - 1; j >= 0; j--) {
 			b[c[a[j]] - 1] = a[j];
 			c[a[j]]--;
 		}
 		return b;
-	}
-	public static void main(String[] args) {
-		int[] a = new int[100000000];
-		for (int i = 0; i < a.length; i++) {
-			a[i] = (int)(Math.random()*1000000);
-		}
-		long from = System.currentTimeMillis();
-		int[] b = countingSort(a);
-		long to = System.currentTimeMillis();
-		System.out.println((to-from)/1000);
 	}
 
 }

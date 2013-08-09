@@ -1,5 +1,9 @@
 package com.xingzhe.maxiumsubarray;
-
+/**
+ * 线性时间求解最大子数组问题
+ * @author Hersules
+ *
+ */
 public class MaxiumSubarray {
 	public static void printMaxSubarrayInfo(int[] a) {
 		int max_sum = a[0];

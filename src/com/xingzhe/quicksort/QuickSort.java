@@ -2,6 +2,12 @@ package com.xingzhe.quicksort;
 
 import com.xingzhe.tool.Tool;
 
+/**
+ * 最原始版本的快排
+ * 
+ * @author Hersules
+ * 
+ */
 public class QuickSort {
 	public static void quick_sort(int[] a, int p, int r) {
 		if (p < r) {

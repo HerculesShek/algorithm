@@ -1,5 +1,9 @@
 package com.xingzhe.insertionSort;
-
+/**
+ * 经典的插入排序
+ * @author Hersules
+ *
+ */
 public class InsertionSort {
 	public void sort(int[] array) {
 		for (int j = 1; j < array.length; j++) {

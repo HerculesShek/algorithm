@@ -1,5 +1,9 @@
 package com.xingzhe.Fibonacci;
-
+/**
+ * 打印斐波那契序列
+ * @author Hersules
+ *
+ */
 public class Fibonacci {
 
 	public static void print(int a, int b, int limit) {

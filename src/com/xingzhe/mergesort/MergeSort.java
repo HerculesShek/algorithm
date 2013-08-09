@@ -5,7 +5,7 @@ import java.util.Random;
 import com.xingzhe.binarysearch.BinarySearch;
 
 /**
- * ¹é²¢ÅÅĞòµÄÊµÏÖ
+ * å½’å¹¶æ’åºçš„å®ç°
  * 
  * @author Hersules
  */
@@ -51,7 +51,7 @@ public class MergeSort {
 	}
 
 	/**
-	 * °ÑoriArrÊı×éÖĞµÄÄÚÈİ´ÓoIdex¿ªÊ¼¸´ÖÆµ½desArrÖĞ£¬´ÓdIdx¿ªÊ¼¸´ÖÆ
+	 * æŠŠoriArræ•°ç»„ä¸­çš„å†…å®¹ä»oIdexå¼€å§‹å¤åˆ¶åˆ°desArrä¸­ï¼Œä»dIdxå¼€å§‹å¤åˆ¶
 	 */
 	private static void copyRest(int[] desArr, int dIdx, int[] oriArr, int oIdx) {
 		for (; oIdx < oriArr.length; oIdx++) {

@@ -1,7 +1,9 @@
 package com.xingzhe.heapsort;
 
+import com.xingzhe.tool.Tool;
+
 /**
- * ¶ÑÅÅĞò Êı×éĞÎÊ½±íÊ¾µÄÊ±ºò£¬¿ªÊ¼Î»ÖÃ´Ó1¼ÆÊı£¬ËùÒÔ»áÓĞ±êÁ¿µÄ×ª»»
+ * å †æ’åº æ•°ç»„å½¢å¼è¡¨ç¤ºçš„æ—¶å€™ï¼Œå¼€å§‹ä½ç½®ä»1è®¡æ•°ï¼Œæ‰€ä»¥ä¼šæœ‰æ ‡é‡çš„è½¬æ¢
  * 
  * @author Hercules
  */
@@ -11,13 +13,13 @@ public class HeapSort {
 		heap_size = a.length;
 		build_max_heap(a);
 		for (int i = a.length; i >= 2; i--) {
-			swap(a, 0, i - 1);
+			Tool.swap(a, 0, i - 1);
 			heap_size--;
 			max_heapify(a, 0);
 		}
 	}
 
-	// ½¨Á¢Ò»¸ö×î´ó¶Ñ,²ÉÓÃ×Ôµ×ÏòÉÏµÄ·½Ê½°ÑÊı×éarray×ª»»Îª×î´ó¶Ñ
+	// å»ºç«‹ä¸€ä¸ªæœ€å¤§å †,é‡‡ç”¨è‡ªåº•å‘ä¸Šçš„æ–¹å¼æŠŠæ•°ç»„arrayè½¬æ¢ä¸ºæœ€å¤§å †
 	public static void build_max_heap(int[] a) {
 		int from = (int) Math.floor(heap_size / 2);
 		for (int i = from; i >= 1; i--) {
@@ -26,7 +28,7 @@ public class HeapSort {
 	}
 
 	/*
-	 * ÈÃ¶ÑaÖĞµÄi½áµãÉÏµÄÖµ¡°¶Ñ»¯¡±¡ª¡ª¾ÍÊÇÈÃi½áµãÉÏµÄÖµÊÇÒÔiÎª¸ù½ÚµãµÄ×ÓÊ÷µÄ×î´óÖµ
+	 * è®©å †aä¸­çš„iç»“ç‚¹ä¸Šçš„å€¼â€œå †åŒ–â€â€”â€”å°±æ˜¯è®©iç»“ç‚¹ä¸Šçš„å€¼æ˜¯ä»¥iä¸ºæ ¹èŠ‚ç‚¹çš„å­æ ‘çš„æœ€å¤§å€¼
 	 */
 	public static void max_heapify(int[] a, int i) {
 		int l = 2 * (i + 1) - 1;
@@ -39,12 +41,12 @@ public class HeapSort {
 			largest = r;
 		}
 		if (largest != i) {
-			swap(a, i, largest);
+			Tool.swap(a, i, largest);
 			max_heapify(a, largest);
 		}
 	}
-	
-	// "¶Ñ»¯"µÄwhile°æ±¾
+
+	// "å †åŒ–"çš„whileç‰ˆæœ¬
 	private static void max_heapify_while_version(int[] a, int i) {
 		int root = i;
 		int l = 2 * (i + 1) - 1;
@@ -59,7 +61,7 @@ public class HeapSort {
 				largest = r;
 			}
 			if (largest != root) {
-				swap(a, root, largest);
+				Tool.swap(a, root, largest);
 				root = largest;
 				l = 2 * (root + 1) - 1;
 				r = 2 * (root + 1);
@@ -70,30 +72,23 @@ public class HeapSort {
 		}
 	}
 
-	private static void swap(int[] a, int i, int j) {
-		if (i == j)
-			return;
-		a[i] += a[j];
-		a[j] = a[i] - a[j];
-		a[i] -= a[j];
-	}
-/**
+	
 	public static void main(String[] args) {
-		int[] a = new int[100000000];
-		Random r = new Random();
-		for (int i = 0; i < a.length; i++) {
-			a[i] = r.nextInt(Integer.MAX_VALUE);
-		}
-		long l1 = System.currentTimeMillis();
-		heap_sort(a);
-		long l2 = System.currentTimeMillis();
-		System.out.println((l2 - l1) / 1000);
-		
-//		int[] a = {6,51,88,8,5,55,4,7,1,5,8,6,2,5,6,211,5,1,1,5,2,1,12,12,12,12,12,15,4564};
-//		heap_sort(a);
+//		int[] a = new int[100000000];
+//		Random r = new Random();
 //		for (int i = 0; i < a.length; i++) {
-//			System.out.println(a[i]);
+//			a[i] = r.nextInt(Integer.MAX_VALUE);
 //		}
+//		long l1 = System.currentTimeMillis();
+//		heap_sort(a);
+//		long l2 = System.currentTimeMillis();
+//		System.out.println((l2 - l1) / 1000);
+		
+		int[] a = {6,51,88,8,5,55,4,7,1,5,8,6,2,5,6,211,5,1,1,5,2,1,12,12,12,12,12,15,4564};
+		heap_sort(a);
+		for (int i = 0; i < a.length; i++) {
+			System.out.println(a[i]);
+		}
 	}
-	*/
+
 }

@@ -1,6 +1,6 @@
 package com.xingzhe.binarysearch;
 /**
- * ¶ş·Ö²éÕÒµÄÁ½ÖÖÊµÏÖ·½Ê½
+ * äºŒåˆ†æŸ¥æ‰¾çš„ä¸¤ç§å®ç°æ–¹å¼
  * @author Herules
  *
  */

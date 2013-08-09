@@ -1,6 +1,6 @@
 package com.xingzhe.mergesort;
 /**
- * ÆäÊµ¸ÃËã·¨±íÃ÷ÁË·ÖÖ®²ßÂÔµÄ±¾ÖÊ
+ * å…¶å®è¯¥ç®—æ³•è¡¨æ˜äº†åˆ†æ²»ç­–ç•¥çš„æœ¬è´¨
  * @author Hersules
  *
  */
@@ -61,7 +61,7 @@ public class MergeAndInsert {
 	}
 
 	/**
-	 * °ÑoriArrÊı×éÖĞµÄÄÚÈİ´ÓoIdex¿ªÊ¼¸´ÖÆµ½desArrÖĞ£¬´ÓdIdx¿ªÊ¼¸´ÖÆ
+	 * æŠŠoriArræ•°ç»„ä¸­çš„å†…å®¹ä»oIdexå¼€å§‹å¤åˆ¶åˆ°desArrä¸­ï¼Œä»dIdxå¼€å§‹å¤åˆ¶
 	 */
 	private static void copyRest(int[] desArr, int dIdx, int[] oriArr, int oIdx) {
 		for (; oIdx < oriArr.length; oIdx++) {
@@ -73,7 +73,7 @@ public class MergeAndInsert {
 	private static double lg(double n) {
 		return Math.log(n) / Math.log(2);
 	}
-	
+
 	public static void main(String[] args) {
 		int[] a = {777777, 4, 7, 8, 77,5,69,486,159,124,136,187,182,183,194,172,14,168,14,139,137,129,184,468,9, 1,5,4,34,3,4,5,56,5,6,43,5,354,3,42,43,23,23,1,23123 };
 		MergeAndInsert.mergeAndInsertSort(a, 0, a.length - 1);
@@ -82,6 +82,4 @@ public class MergeAndInsert {
 		}
 	}
 }
-
-
 
