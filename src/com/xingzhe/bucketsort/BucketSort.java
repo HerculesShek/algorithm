@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * 桶排序，要求输入的数据都服从均匀分布 算法假设每个元素a[i]满足 0<=a[i]<1
  * 
- * @author Hersules
+ * @author Hercules
  * 
  */
 public class BucketSort {
