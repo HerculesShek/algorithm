@@ -151,7 +151,7 @@ public class BinarySearchTree {
 			return tree_search(t.rightChild, k);
 	}
 
-	private TreeNode tree_minimum(TreeNode t) {
+	protected TreeNode tree_minimum(TreeNode t) {
 		while (t.leftChild != null)
 			t = t.leftChild;
 		return t;

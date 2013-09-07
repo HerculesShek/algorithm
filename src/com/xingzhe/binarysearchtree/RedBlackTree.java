@@ -1,17 +1,24 @@
 package com.xingzhe.binarysearchtree;
 
 public class RedBlackTree extends BinarySearchTree {
-	public final TreeNode NIL = new TreeNode();
-	private TreeNode root;
-
-	public TreeNode getRoot() {
-		return root;
+	public RedBlackTree() {
+		NIL.setColor(Color.BLACK);
+		this.setRoot(this.NIL);
 	}
 
-	public void setRoot(TreeNode root) {
-		this.root = root;
-	}
+	private final TreeNode NIL = new TreeNode();
 
+	@Override
+	public void inorder_tree_walk() {
+		inorder_tree_walk((TreeNode)this.getRoot());
+	}
+	private void inorder_tree_walk(TreeNode t) {
+		if (t != this.NIL) {
+			inorder_tree_walk((TreeNode)t.getLeftChild());
+			System.out.println(t.getElement());
+			inorder_tree_walk((TreeNode)t.getRightChild());
+		}
+	}
 	// 左旋操作
 	public void left_rotate(TreeNode x) {
 		TreeNode y = (TreeNode) x.getRightChild();
@@ -20,7 +27,7 @@ public class RedBlackTree extends BinarySearchTree {
 			y.getLeftChild().setParent(x);
 		y.setParent(x.getParent());
 		if (x.getParent() == this.NIL)
-			this.root = y;
+			this.setRoot(y);
 		else if (x == x.getParent().getLeftChild())
 			x.getParent().setLeftChild(y);
 		else
@@ -37,7 +44,7 @@ public class RedBlackTree extends BinarySearchTree {
 			x.getRightChild().setParent(y);
 		x.setParent(y.getParent());
 		if (y.getParent() == this.NIL)
-			this.root = x;
+			this.setRoot(x);
 		else if (y == y.getParent().getLeftChild())
 			y.getParent().setLeftChild(x);
 		else
@@ -49,7 +56,7 @@ public class RedBlackTree extends BinarySearchTree {
 	// 插入操作
 	public void tree_insert(TreeNode z) {
 		TreeNode y = this.NIL;
-		TreeNode x = this.root;
+		TreeNode x = (TreeNode) this.getRoot();
 		while (x != this.NIL) {
 			y = x;
 			if (z.getElement() < x.getElement())
@@ -59,11 +66,11 @@ public class RedBlackTree extends BinarySearchTree {
 		}
 		z.setParent(y);
 		if (y == this.NIL)
-			this.root = z;
+			this.setRoot(z);
 		else if (z.getElement() < y.getElement())
 			y.setLeftChild(z);
 		else
-			y.setLeftChild(z);
+			y.setRightChild(z);
 		z.setLeftChild(this.NIL);
 		z.setRightChild(NIL);
 		z.setColor(Color.RED);
@@ -73,24 +80,136 @@ public class RedBlackTree extends BinarySearchTree {
 	// 插入操作后的修正
 	private void rb_insert_fixup(TreeNode z) {
 		while (((TreeNode) z.getParent()).color == Color.RED) {
-			if (z.getParent() == z.getParent().getParent().getLeftChild()) {
-				TreeNode y = (TreeNode) z.getParent().getParent().getRightChild();
+			if (z.getParent() == z.getParent().getParent().getLeftChild()) {// z的父节点是祖父节点的左孩子
+				TreeNode y = (TreeNode) z.getParent().getParent()
+						.getRightChild();
 				if (y.color == Color.RED) {
 					((TreeNode) z.getParent()).color = Color.BLACK;
 					y.color = Color.BLACK;
-					((TreeNode) y.getParent().getParent()).color = Color.RED;
+					((TreeNode) z.getParent().getParent()).color = Color.RED;
 					z = (TreeNode) z.getParent().getParent();
 				} else if (z == z.getParent().getRightChild()) {
 					z = (TreeNode) z.getParent();
 					left_rotate(z);
+				} else {
+					((TreeNode) z.getParent()).color = Color.BLACK;
+					TreeNode ff = (TreeNode) z.getParent().getParent();
+					ff.color = Color.RED;
+					right_rotate(ff);
 				}
-				((TreeNode) z.getParent()).color = Color.BLACK;
-				((TreeNode) z.getParent().getParent()).color = Color.RED;
-				right_rotate((TreeNode) z.getParent().getParent());
-			} else {// TODO
-				
+			} else {// //z的父节点是祖父节点的右孩子
+				TreeNode y = (TreeNode) z.getParent().getParent()
+						.getLeftChild();
+				if (y.color == Color.RED) {
+					((TreeNode) z.getParent()).color = Color.BLACK;
+					y.color = Color.BLACK;
+					((TreeNode) z.getParent().getParent()).color = Color.RED;
+					z = (TreeNode) z.getParent().getParent();
+				} else if (z == z.getParent().getLeftChild()) {
+					z = (TreeNode) z.getParent();
+					right_rotate(z);
+				} else {
+					((TreeNode) z.getParent()).color = Color.BLACK;
+					TreeNode ff = (TreeNode) z.getParent().getParent();
+					ff.color = Color.RED;
+					left_rotate(ff);
+				}
 			}
 		}
+		((TreeNode) this.getRoot()).color = Color.BLACK;
+	}
+
+	public void rb_transplant(TreeNode u, TreeNode v) {
+		if (u.getParent() == this.NIL)
+			this.setRoot(v);
+		else if (u == u.getParent().getLeftChild())
+			u.getParent().setLeftChild(v);
+		else
+			u.getParent().setRightChild(v);
+		v.setParent(u.getParent());
+	}
+
+	public void tree_delete(TreeNode z) {
+		TreeNode y = z;
+		Color y_original_color = y.color;
+		TreeNode x;
+		if (z.getLeftChild() == this.NIL) {
+			x = (TreeNode) z.getRightChild();
+			rb_transplant(z, (TreeNode) z.getRightChild());
+		} else if (z.getRightChild() == this.NIL) {
+			x = (TreeNode) z.getLeftChild();
+			rb_transplant(z, (TreeNode) z.getLeftChild());
+		} else {
+			y = (TreeNode) tree_minimum(z.getRightChild());
+			y_original_color = y.color;
+			x = (TreeNode) y.getRightChild();
+			if (y.getParent() == z)
+				x.setParent(y);
+			else {
+				rb_transplant(y, (TreeNode) y.getRightChild());
+				y.setRightChild(z.getRightChild());
+				y.getRightChild().setParent(y);
+			}
+			rb_transplant(z, y);
+			y.setLeftChild(z.getLeftChild());
+			y.getLeftChild().setParent(y);
+			y.setColor(z.color);
+		}
+		if (y_original_color == Color.BLACK)
+			rb_delete_fixup(x);
+	}
+
+	private void rb_delete_fixup(TreeNode x) {
+		while (x != this.getRoot() && x.color == Color.BLACK) {
+			if (x == x.getParent().getLeftChild()) {
+				TreeNode w = (TreeNode) x.getParent().getRightChild();
+				if (w.color == Color.RED) {
+					w.color = Color.BLACK;
+					((TreeNode) x.getParent()).color = Color.RED;
+					left_rotate((TreeNode) x.getParent());
+					w = (TreeNode) x.getParent().getRightChild();
+				}
+				if (((TreeNode) w.getLeftChild()).color == Color.BLACK
+						&& ((TreeNode) w.getRightChild()).color == Color.BLACK) {
+					w.color = Color.RED;
+					x = (TreeNode) x.getParent();
+				} else if (((TreeNode) w.getRightChild()).color == Color.BLACK) {
+					((TreeNode) w.getLeftChild()).color = Color.BLACK;
+					w.color = Color.RED;
+					right_rotate(w);
+					w = (TreeNode) x.getParent().getRightChild();
+				}
+				w.color = ((TreeNode) x.getParent()).color;
+				((TreeNode) x.getParent()).color = Color.BLACK;
+				((TreeNode) w.getRightChild()).color = Color.BLACK;
+				left_rotate((TreeNode) x.getParent());
+				x = (TreeNode) this.getRoot();
+			} else {
+				TreeNode w = (TreeNode) x.getParent().getLeftChild();
+				if (w.color == Color.RED) {
+					w.color = Color.BLACK;
+					((TreeNode) x.getParent()).color = Color.RED;
+					right_rotate((TreeNode) x.getParent());
+					w = (TreeNode) x.getParent().getLeftChild();
+				}
+				if (((TreeNode) w.getLeftChild()).color == Color.BLACK
+						&& ((TreeNode) w.getRightChild()).color == Color.BLACK) {
+					w.color = Color.RED;
+					x = (TreeNode) x.getParent();
+				} else if (((TreeNode) w.getLeftChild()).color == Color.BLACK) {
+					((TreeNode) w.getRightChild()).color = Color.BLACK;
+					w.color = Color.RED;
+					left_rotate(w);
+					w = (TreeNode) x.getParent().getLeftChild();
+				}
+				w.color = ((TreeNode) x.getParent()).color;
+				((TreeNode) x.getParent()).color = Color.BLACK;
+				((TreeNode) w.getLeftChild()).color = Color.BLACK;
+				right_rotate((TreeNode) x.getParent());
+				x = (TreeNode) this.getRoot();
+			}
+		}
+		x.color = Color.BLACK;
 	}
 
 	class TreeNode extends BinarySearchTree.TreeNode {
@@ -112,11 +231,40 @@ public class RedBlackTree extends BinarySearchTree {
 	public static void main(String[] args) {
 		RedBlackTree rbt = new RedBlackTree();
 
-		TreeNode n = rbt.new TreeNode();
-		n.setColor(Color.BLACK);
+		TreeNode n1 = rbt.new TreeNode();
+		n1.setElement(7);
+		rbt.tree_insert(n1);
 
-		rbt.tree_insert(n);
+		TreeNode n2 = rbt.new TreeNode();
+		n2.setElement(3);
+		rbt.tree_insert(n2);
+
+		TreeNode n3 = rbt.new TreeNode();
+		n3.setElement(9);
+		rbt.tree_insert(n3);
+
+		TreeNode n4 = rbt.new TreeNode();
+		n4.setElement(8);
+		rbt.tree_insert(n4);
+
+		TreeNode n5 = rbt.new TreeNode();
+		n5.setElement(10);
+		rbt.tree_insert(n5);
+
+		TreeNode n6 = rbt.new TreeNode();
+		n6.setElement(6);
+		rbt.tree_insert(n6);
+
+		TreeNode n7 = rbt.new TreeNode();
+		n7.setElement(5);
+		rbt.tree_insert(n7);
+
+		TreeNode n8 = rbt.new TreeNode();
+		n8.setElement(4);
+		rbt.tree_insert(n8);
+		
+		rbt.tree_delete(n2);
+
 		rbt.inorder_tree_walk();
 	}
-
 }
