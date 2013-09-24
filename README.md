@@ -1,4 +1,4 @@
 algorithm
 =========
 
-my person algorithm summary
+my personal algorithm summary
