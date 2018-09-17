@@ -10,14 +10,14 @@ import com.xingzhe.tool.Tool;
  */
 public class QuickSort {
 	public static void quick_sort(int[] a, int p, int r) {
-		if (p < r) {
-			int q = partion(a, p, r);
-			quick_sort(a, p, q - 1);
-			quick_sort(a, q + 1, r);
-		}
-	}
+        if (p < r) {
+            int q = partition(a, p, r);
+            quick_sort(a, p, q - 1);
+            quick_sort(a, q + 1, r);
+        }
+    }
 
-	private static int partion(int[] a, int p, int r) {
+	private static int partition(int[] a, int p, int r) {
 		int x = a[r];
 		int i = p - 1;
 		for (int j = p; j <= r - 1; j++) {

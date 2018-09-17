@@ -5,8 +5,7 @@ package com.xingzhe.binarysearch;
  *
  */
 public class BinarySearch {
-	public static int iterativeBinarySearch(int[] array, int v, int low,
-			int high) {
+	public static int iterativeBinarySearch(int[] array, int v, int low, int high) {
 		while (low <= high) {
 			int mid = (int) Math.floor((low + high) / 2);
 			if (v == array[mid]) {
@@ -20,8 +19,7 @@ public class BinarySearch {
 		return -1;
 	}
 
-	public static int recursiveBinarySerarch(int[] array, int v, int low,
-			int high) {
+	public static int recursiveBinarySerarch(int[] array, int v, int low, int high) {
 		if (low > high)
 			return -1;
 		int mid = (int) Math.floor((low + high) / 2);

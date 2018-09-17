@@ -1,5 +1,8 @@
 package com.xingzhe.binarysearchtree;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 public class BinarySearchTree {
 	private TreeNode root;// 根节点
 
@@ -211,5 +214,8 @@ public class BinarySearchTree {
 			b.tree_insert(n);
 		}
 		b.inorder_tree_walk();
+
+		HashSet set = new HashSet();
+		set.add(555);
 	}
 }

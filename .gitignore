@@ -17,3 +17,6 @@
 *.rar
 *.tar
 *.zip
+
+.idea
+out
